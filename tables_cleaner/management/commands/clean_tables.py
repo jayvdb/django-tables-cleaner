@@ -127,6 +127,8 @@ class Command(BaseCommand):
         get_latest_by = table.get('get_latest_by', getattr(model._meta, 'get_latest_by', None))
         #get_latest_by = getattr(model._meta, 'get_latest_by', None)
         if get_latest_by is None:
+            get_latest_by = table.get('action_time')
+        if get_latest_by is None:
             raise Exception('"%s": missing required attribute "get_latest_by"' % table['model'])
         if get_latest_by.startswith('-'):
             get_latest_by = get_latest_by[1:]
